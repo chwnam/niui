@@ -1,14 +1,16 @@
 <?php
 /**
  * Plugin Name: Naran Image URL Interpolator
- * Description: Your local development website helper. All your attachehd local images URLs are substituted with your real server URLS.
+ * Description: All your attachehd local images URLs are substituted with your real server URLS.
  * Author:      Changwoo
  * Author URI:  mailto://cs.chwnam@gmail.com
  * Version:     1.0.0
+ * Plugin URI:  https://github.com/chwnam/niui
  */
 
-if ( 'local' === wp_get_environment_type() &&
-     defined( 'NIUI_HOST' ) && ( $host = parse_url( NIUI_HOST ) ) && ( $host['scheme'] && $host['host'] )
+if (
+	in_array( wp_get_environment_type(), [ 'local', 'development' ], true ) &&
+	defined( 'NIUI_HOST' ) && ( $host = parse_url( NIUI_HOST ) ) && ( $host['scheme'] && $host['host'] )
 ) {
 	new class( "{$host['scheme']}://{$host['host']}" ) {
 

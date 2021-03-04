@@ -14,7 +14,7 @@
 wp-config.php에 다음 설정을 붙입니다.
 
 ```php
-define( 'WP_ENVIRONMENT_TYPE', 'local' );
+define( 'WP_ENVIRONMENT_TYPE', 'local' ); // or 'development'
 define( 'NIUI_HOST', 'https://you-real-domain.com');
 ```
 
