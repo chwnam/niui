@@ -4,8 +4,9 @@
  * Description: All your attachehd local images URLs are substituted with your real server URLS.
  * Author:      Changwoo
  * Author URI:  mailto://cs.chwnam@gmail.com
- * Version:     1.0.0
+ * Version:     1.0.1
  * Plugin URI:  https://github.com/chwnam/niui
+ * License:     GPLv2 or later
  */
 
 if (
@@ -43,11 +44,7 @@ if (
 
 			if ( ! $this->is_image_exist( $attachment_id ) ) {
 				foreach ( $sources as $key => $source ) {
-					$sources[ $key ]['url'] = str_replace(
-						$this->home_url,
-						'https://blog.cheil.com',
-						$sources[ $key ]['url']
-					);
+					$sources[ $key ]['url'] = str_replace( $this->home_url, $this->host, $sources[ $key ]['url'] );
 				}
 			}
 
