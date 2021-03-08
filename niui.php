@@ -4,7 +4,7 @@
  * Description: All your attachehd local images URLs are substituted with your real server URLS.
  * Author:      Changwoo
  * Author URI:  mailto://cs.chwnam@gmail.com
- * Version:     1.0.1
+ * Version:     1.0.2
  * Plugin URI:  https://github.com/chwnam/niui
  * License:     GPLv2 or later
  */
@@ -29,6 +29,7 @@ if (
 			add_filter( 'wp_get_attachment_image_src', [ $this, 'attachment_image_src' ], 9999, 2 );
 			add_filter( 'wp_calculate_image_srcset', [ $this, 'image_srcset' ], 9999, 5 );
 			add_filter( 'the_content', [ $this, 'image_content' ], 9999 );
+			add_filter( 'wp_prepare_attachment_for_js', [ $this, 'attachment_for_js' ], 9999, 2 );
 		}
 
 		public function attachment_image_src( $image, $attachment_id ) {
@@ -57,6 +58,21 @@ if (
 			$content  = preg_replace( $regex, " src={$this->host}\$2 ", $content );
 
 			return $content;
+		}
+
+		public function attachment_for_js( array $response, WP_Post $attachment ): array {
+			if ( ! $this->is_image_exist( $attachment->ID ) ) {
+				$response['url'] = str_replace( $this->home_url, $this->host, $response['url'] );
+				foreach ( array_keys( $response['sizes'] ) as $size ) {
+					$response['sizes'][ $size ]['url'] = str_replace(
+						$this->home_url,
+						$this->host,
+						$response['sizes'][ $size ]['url']
+					);
+				}
+			}
+
+			return $response;
 		}
 
 		private function is_image_exist( int $attachment_id ): bool {

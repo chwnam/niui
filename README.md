@@ -26,3 +26,4 @@ define( 'NIUI_HOST', 'https://you-real-domain.com');
   * img src 속성에 적용.
   * img srcset 속성에 적용.
 * 이미지 본문에 삽입된 image src 속성에 적용됩니다.
+* 관리자 이미지 라이브러리. (1.0.2부터)  

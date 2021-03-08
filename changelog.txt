@@ -1,8 +1,14 @@
+1.0.2
+=====
+Mar. 8th, 2021.
+* URL substitution for media library images.
+
+
 1.0.1
 =====
-Mar. 5.
+Mar. 5th, 2021.
 
 
 1.0.0
 =====
-Mar. 4.
+Mar. 4th, 2021.
