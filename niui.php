@@ -55,7 +55,15 @@ if (
 		public function image_content( string $content ): string {
 			$home_url = preg_quote( $this->home_url, '/' );
 			$regex    = "/\s+src=(\"|'){$home_url}(.+?)(\"|')\s+/";
-			$content  = preg_replace( $regex, " src={$this->host}\$2 ", $content );
+
+			$content = preg_replace_callback( $regex, function( $matches ) {
+				$maybe_file = untrailingslashit( ABSPATH ) . $matches[2];
+				if ( file_exists( $maybe_file ) ) {
+					return $matches[0];
+				} else {
+					return " src={$this->host}{$matches[2]}";
+				}
+			}, $content);
 
 			return $content;
 		}
