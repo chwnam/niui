@@ -61,7 +61,7 @@ if (
 				if ( file_exists( $maybe_file ) ) {
 					return $matches[0];
 				} else {
-					return " src={$this->host}{$matches[2]}";
+					return " src=\"{$this->host}{$matches[2]}\" ";
 				}
 			}, $content);
 
